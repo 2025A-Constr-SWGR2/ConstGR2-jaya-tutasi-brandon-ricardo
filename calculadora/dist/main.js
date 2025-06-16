@@ -6,5 +6,7 @@ async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     await app.listen(process.env.PORT ?? 3000);
 }
-bootstrap();
+bootstrap()
+    .then(() => console.warn('Servidor levantado'))
+    .catch(() => console.error('Hubo errores'));
 //# sourceMappingURL=main.js.map
