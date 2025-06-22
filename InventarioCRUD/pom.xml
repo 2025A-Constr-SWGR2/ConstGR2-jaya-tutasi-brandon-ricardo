@@ -17,6 +17,8 @@
         <mysql.version>8.0.33</mysql.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+
+        <h2.version>2.2.224</h2.version>
     </properties>
 
     <dependencies>
@@ -26,6 +28,14 @@
             <artifactId>jakarta.jakartaee-api</artifactId>
             <version>${jakartaee.version}</version>
             <scope>provided</scope>
+        </dependency>
+
+        <!-- Base de datos embebida -->
+        <dependency>
+        <groupId>com.h2database</groupId>
+        <artifactId>h2</artifactId>
+        <version>${h2.version}</version>
+        <scope>test</scope>
         </dependency>
 
         <!-- EclipseLink -->
@@ -77,6 +87,12 @@
 
     <build>
         <finalName>${project.artifactId}</finalName>
+        <testResources>
+        <testResource>
+            <directory>src/test/resources</directory>
+            <filtering>true</filtering>
+        </testResource>
+        </testResources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -94,6 +110,16 @@
                     <!-- <compilerVersion>17</compilerVersion> -->
                 </configuration>
             </plugin>
+            <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.2.2</version>
+            <configuration>
+                <systemPropertyVariables>
+                    <test.environment>unit-test</test.environment>
+                </systemPropertyVariables>
+            </configuration>
+        </plugin>
         </plugins>
     </build>
 </project>

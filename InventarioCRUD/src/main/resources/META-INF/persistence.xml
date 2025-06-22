@@ -9,22 +9,55 @@
     <class>modelos.Producto</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
+      <!-- 
+        =============================================
+        CONFIGURACIÓN PARA MYSQL (PRODUCCIÓN/DESARROLLO)
+        =============================================
+        Descomentar y configurar estos valores cuando se use MySQL
+        Comentar o eliminar la configuración de H2 cuando se use MySQL
+        
       <property name="jakarta.persistence.jdbc.url"
                 value="jdbc:mysql://localhost:3306/inventario?serverTimezone=UTC"/>
       <property name="jakarta.persistence.jdbc.user" value="root"/>
       <property name="jakarta.persistence.jdbc.driver"
                 value="com.mysql.cj.jdbc.Driver"/>
       <property name="jakarta.persistence.jdbc.password" value="root"/>
+      <property name="eclipselink.target-database" value="MySQL"/>
+      -->
+
+      <!-- 
+        =============================================
+        CONFIGURACIÓN PARA H2 (PRUEBAS/DESARROLLO LOCAL)
+        =============================================
+        Base de datos en memoria para pruebas unitarias
+        Comentar o eliminar esta sección cuando se use MySQL
+      -->
+      <property name="jakarta.persistence.jdbc.url" 
+                value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;MODE=MySQL"/>
+      <property name="jakarta.persistence.jdbc.driver" 
+                value="org.h2.Driver"/>
+      <property name="jakarta.persistence.jdbc.user" 
+                value="sa"/>
+      <property name="jakarta.persistence.jdbc.password" 
+                value=""/>
+      <property name="eclipselink.target-database" 
+                value="org.eclipse.persistence.platform.database.H2Platform"/>
+
+      <!-- 
+        Configuración común para ambos entornos 
+      -->
       <property name="jakarta.persistence.schema-generation.database.action"
                 value="create"/>
       <property name="eclipselink.ddl-generation"
                 value="create-tables"/>
       <property name="eclipselink.ddl-generation.output-mode"
                 value="database"/>
-      <property name="eclipselink.target-database" value="MySQL"/>
-      <property name="eclipselink.logging.level" value="FINE"/>
-      <property name="eclipselink.weaving" value="false"/>
-      <property name="eclipselink.json.type" value="jackson"/>
+      <property name="eclipselink.logging.level" 
+                value="FINE"/>
+      <property name="eclipselink.weaving" 
+                value="false"/>
+      <property name="eclipselink.json.type" 
+                value="jackson"/>
     </properties>
   </persistence-unit>
 </persistence>

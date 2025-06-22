@@ -17,9 +17,15 @@ public class ControllerProducto extends HttpServlet {
 
     private EntityManagerFactory emf;
 
+    public void setEntityManagerFactory(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
+
     @Override
     public void init() throws ServletException {
-        emf = Persistence.createEntityManagerFactory("Tarea1PU");
+        if (emf == null) { // Solo crear si no se inyectó (para pruebas)
+            emf = Persistence.createEntityManagerFactory("Tarea1PU");
+        }
     }
 
     @Override
