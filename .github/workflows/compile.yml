@@ -1,32 +1,29 @@
-name: Compile Project
+name: Compilación del Proyecto
 
 on:
   push:
-    branches: [ main, develop ]
-    paths:
-      - 'InventarioCRUD/**'
-  pull_request:
-    branches: [ main, develop ]
 
 jobs:
   compile:
+    name: Compilar proyecto
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout código
+      uses: actions/checkout@v4
       
-    - name: Set up JDK 17
+    - name: Configurar JDK 17
       uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: 'temurin'
         cache: 'maven'
         
-    - name: Compile project
+    - name: Compilar con Maven
       working-directory: ./InventarioCRUD
       run: mvn clean compile -DskipTests=true
       
-    - name: Archive compiled code
+    - name: Subir artefactos compilados
       uses: actions/upload-artifact@v4
       with:
         name: compiled-code
