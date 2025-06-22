@@ -10,8 +10,8 @@ jobs:
       - name: Usar nodejs
         uses: actions/setup-node@v4
         with:
-        node-version: '22.x'
-      - name: Instalar dependencias 
+          node-version: '22.x'
+      - name: Instalar dependencias
         run: npm ci
       - name: Compilar
         run: npm run build
