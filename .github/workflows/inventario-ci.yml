@@ -1,4 +1,4 @@
-name: Inventario CRUD CI/CD
+name: Inventario CI Pipeline
 
 on:
   push:
@@ -9,18 +9,42 @@ on:
       - 'InventarioCRUD/**'
 
 jobs:
-  compile:
-    uses: ./.github/workflows/inventario-compile.yml
-    secrets: inherit
-  lint:
-    needs: compile
-    uses: ./.github/workflows/inventario-lint.yml
-    secrets: inherit
-  unit-tests:
-    needs: compile
-    uses: ./.github/workflows/inventario-unit-tests.yml
-    secrets: inherit
-  build-docker:
-    needs: [compile, lint, unit-tests]
-    uses: ./.github/workflows/inventario-build-docker.yml
-    secrets: inherit
+  test:
+    runs-on: ubuntu-latest
+    
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: inventario
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+    - uses: actions/checkout@v4
+      
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: 'maven'
+        
+    - name: Run unit tests
+      working-directory: ./InventarioCRUD
+      run: mvn test
+        
+    - name: Generate coverage report
+      working-directory: ./InventarioCRUD
+      run: mvn jacoco:report
+        
+    - name: Upload test reports
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-reports
+        path: |
+          InventarioCRUD/target/surefire-reports
+          InventarioCRUD/target/site/jacoco
