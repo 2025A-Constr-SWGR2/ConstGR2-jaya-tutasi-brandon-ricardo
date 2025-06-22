@@ -121,7 +121,9 @@
                 <filtering>true</filtering>
             </testResource>
         </testResources>
-        <plugin>
+       
+        <plugins>
+         <plugin>
             <groupId>com.github.spotbugs</groupId>
             <artifactId>spotbugs-maven-plugin</artifactId>
             <version>4.7.3.6</version>
@@ -129,7 +131,6 @@
                 <failOnError>false</failOnError> <!-- Cambiar a true cuando arregles los issues -->
             </configuration>
         </plugin>
-        <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
