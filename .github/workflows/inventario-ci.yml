@@ -3,10 +3,10 @@ name: Inventario CI Pipeline
 on:
   push:
     paths:
-      - 'InventarioCRUD/**'
+      - 'ConstGR2-jaya-tutasi-brandon-ricardo/**'
   pull_request:
     paths:
-      - 'InventarioCRUD/**'
+      - 'ConstGR2-jaya-tutasi-brandon-ricardo/**'
 
 jobs:
   test:
