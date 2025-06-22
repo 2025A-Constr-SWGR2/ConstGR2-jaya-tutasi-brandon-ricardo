@@ -1,2 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/GR01_1BT2_622_25A"/>
+<Context docBase="/usr/local/tomcat/webapps/GR01_1BT2_622_25A.war">
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+    <Environment 
+        name="DB_URL" 
+        value="jdbc:h2:file:/usr/local/tomcat/h2-data/inventariodb;DB_CLOSE_DELAY=-1" 
+        type="java.lang.String" 
+        override="false"/>
+    <Environment 
+        name="DB_USER" 
+        value="sa" 
+        type="java.lang.String" 
+        override="false"/>
+</Context>
