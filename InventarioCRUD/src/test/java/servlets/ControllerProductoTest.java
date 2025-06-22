@@ -1,12 +1,12 @@
 package servlets;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,10 +19,10 @@ public class ControllerProductoTest {
     private ControllerProducto controller;
     private HttpServletRequest request;
     private HttpServletResponse response;
+    private RequestDispatcher requestDispatcher;
 
     @BeforeAll
     public static void setUpClass() {
-        // Crear EMF para H2 (usa persistence.xml con configuración H2)
         emf = Persistence.createEntityManagerFactory("Tarea1PU");
     }
 
@@ -34,11 +34,15 @@ public class ControllerProductoTest {
     }
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws Exception {
         controller = new ControllerProducto();
         request = mock(HttpServletRequest.class);
         response = mock(HttpServletResponse.class);
-
+        requestDispatcher = mock(RequestDispatcher.class);
+        
+        // Configurar el mock para getRequestDispatcher
+        when(request.getRequestDispatcher(anyString())).thenReturn(requestDispatcher);
+        
         // Inyectar el EMF de prueba
         controller.setEntityManagerFactory(emf);
     }
@@ -57,31 +61,37 @@ public class ControllerProductoTest {
         // Verificar en base de datos
         EntityManager em = emf.createEntityManager();
         Producto producto = em.createQuery("SELECT p FROM Producto p WHERE p.nombre = 'Laptop HP'", Producto.class)
-                .getSingleResult();
+                            .getSingleResult();
         em.close();
 
         assertNotNull(producto);
         assertEquals("Laptop HP", producto.getNombre());
         assertEquals(10, producto.getCantidad());
+        
+        // Verificar redirección
+        verify(request).getRequestDispatcher("index.jsp");
+        verify(requestDispatcher).forward(request, response);
     }
 
     @Test
     public void testValidacionCamposVacios() throws Exception {
         when(request.getParameter("nombre")).thenReturn("");
         when(request.getParameter("descripcion")).thenReturn("");
-
+        
         controller.doPost(request, response);
-
+        
         verify(request).setAttribute(eq("errorMessage"), any(String.class));
+        verify(request).getRequestDispatcher("index.jsp");
     }
 
     @Test
     public void testValidacionNumerosInvalidos() throws Exception {
         when(request.getParameter("nombre")).thenReturn("Teclado");
         when(request.getParameter("cantidad")).thenReturn("abc");
-
+        
         controller.doPost(request, response);
-
+        
         verify(request).setAttribute(eq("errorMessage"), any(String.class));
+        verify(request).getRequestDispatcher("index.jsp");
     }
 }
