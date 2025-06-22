@@ -1,6 +1,16 @@
-name: Java CI with H2 Tests
+name: Java CI Tests
 
-on: [push, pull_request]
+on:
+  push:
+    paths:
+      - 'src/**'
+      - 'pom.xml'
+      - 'run-tests.sh'
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'pom.xml'
+      - 'run-tests.sh'
 
 jobs:
   test:
@@ -16,10 +26,11 @@ jobs:
         distribution: 'temurin'
         cache: 'maven'
         
-    - name: Run tests with H2
-      run: |
-        cd InventarioCRUD
-        ./run-tests.sh
+    - name: Make test script executable
+      run: chmod +x run-tests.sh
+        
+    - name: Run tests
+      run: ./run-tests.sh
         
     - name: Upload test reports
       if: always()
@@ -27,5 +38,5 @@ jobs:
       with:
         name: test-reports
         path: |
-          InventarioCRUD/target/surefire-reports
-          InventarioCRUD/target/site/jacoco
+          target/surefire-reports
+          target/site/jacoco
