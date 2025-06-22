@@ -1,16 +1,6 @@
 name: Java CI Tests
 
-on:
-  push:
-    paths:
-      - 'src/**'
-      - 'pom.xml'
-      - 'run-tests.sh'
-  pull_request:
-    paths:
-      - 'src/**'
-      - 'pom.xml'
-      - 'run-tests.sh'
+on: [push]
 
 jobs:
   test:

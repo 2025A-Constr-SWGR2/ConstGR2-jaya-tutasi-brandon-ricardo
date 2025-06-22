@@ -1,6 +1,6 @@
 name: Inventario Compile
 
-on: workflow_call
+on: [push]
 
 jobs:
   compile:

@@ -1,6 +1,6 @@
 name: Inventario Lint
 
-on: workflow_call
+on: [push]
 
 jobs:
   lint:
