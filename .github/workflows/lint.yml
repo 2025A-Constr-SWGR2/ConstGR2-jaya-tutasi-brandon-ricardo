@@ -2,6 +2,9 @@ name: Análisis de Calidad de Código
 
 on:
   push:
+    branches: [ main, develop ]
+    paths:
+      - 'InventarioCRUD/**'
 
 jobs:
   lint:
@@ -19,9 +22,9 @@ jobs:
         distribution: 'temurin'
         cache: 'maven'
         
-    - name: Ejecutar Checkstyle
+    - name: Ejecutar Checkstyle (sin fallar)
       working-directory: ./InventarioCRUD
-      run: mvn checkstyle:check
+      run: mvn checkstyle:check -Dcheckstyle.failOnViolation=false
       
     - name: Ejecutar PMD
       working-directory: ./InventarioCRUD

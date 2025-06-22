@@ -1,5 +1,5 @@
 name: Compilación del Proyecto
-
+run-name: Compile
 on:
   push:
 
