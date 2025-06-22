@@ -1,0 +1,26 @@
+name: Inventario CRUD CI/CD
+
+on:
+  push:
+    paths:
+      - 'InventarioCRUD/**'
+  pull_request:
+    paths:
+      - 'InventarioCRUD/**'
+
+jobs:
+  compile:
+    uses: ./.github/workflows/inventario-compile.yml
+    secrets: inherit
+  lint:
+    needs: compile
+    uses: ./.github/workflows/inventario-lint.yml
+    secrets: inherit
+  unit-tests:
+    needs: compile
+    uses: ./.github/workflows/inventario-unit-tests.yml
+    secrets: inherit
+  build-docker:
+    needs: [compile, lint, unit-tests]
+    uses: ./.github/workflows/inventario-build-docker.yml
+    secrets: inherit
