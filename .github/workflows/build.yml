@@ -12,7 +12,7 @@ jobs:
         with:
           node-version: '22.x'
       - name: Entrar carpeta calculadora
-        run: cd calculadora
+        run: cd .\calculadora\
       - name: Dir
         run: dir
       - name: Instalar dependencias
