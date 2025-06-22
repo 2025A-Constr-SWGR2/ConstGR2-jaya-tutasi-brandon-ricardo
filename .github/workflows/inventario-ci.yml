@@ -32,13 +32,11 @@ jobs:
         distribution: 'temurin'
         cache: 'maven'
         
-    - name: Run unit tests
+    - name: Run tests with Maven
       working-directory: ./InventarioCRUD
-      run: mvn test
-        
-    - name: Generate coverage report
-      working-directory: ./InventarioCRUD
-      run: mvn jacoco:report
+      run: |
+        mvn clean test
+        mvn jacoco:report
         
     - name: Upload test reports
       if: always()
