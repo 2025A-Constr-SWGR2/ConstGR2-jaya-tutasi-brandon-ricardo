@@ -1,10 +1,8 @@
 name: Análisis de Calidad de Código
+run-name: Lint
 
 on:
   push:
-    branches: [ main, develop ]
-    paths:
-      - 'InventarioCRUD/**'
 
 jobs:
   lint:
