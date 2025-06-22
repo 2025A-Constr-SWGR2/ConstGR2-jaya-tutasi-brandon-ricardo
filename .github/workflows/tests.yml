@@ -1,0 +1,41 @@
+name: Pruebas Unitarias
+run-name: Pruebas Unitarias
+
+on:
+  push:
+
+jobs:
+  test:
+    name: Ejecutar pruebas con H2
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout código
+      uses: actions/checkout@v4
+      
+    - name: Configurar JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: 'maven'
+        
+    - name: Ejecutar pruebas unitarias
+      working-directory: ./InventarioCRUD
+      run: mvn clean test
+      env:
+        TEST_ENVIRONMENT: unit-test
+      
+    - name: Generar reporte de cobertura
+      working-directory: ./InventarioCRUD
+      run: mvn jacoco:report
+      
+    - name: Subir reportes de pruebas
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-reports
+        path: |
+          InventarioCRUD/target/surefire-reports
+          InventarioCRUD/target/site/jacoco
+        retention-days: 7
