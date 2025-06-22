@@ -2,9 +2,6 @@ name: Análisis de Calidad de Código
 
 on:
   push:
-    branches: [ main, develop ]
-    paths:
-      - 'InventarioCRUD/**'
 
 jobs:
   lint:
