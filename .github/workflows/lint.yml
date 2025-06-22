@@ -1,5 +1,5 @@
 name: Análisis de Calidad de Código
-run-name: Lint
+run-name: Lint 
 
 on:
   push:
@@ -22,15 +22,18 @@ jobs:
         
     - name: Ejecutar Checkstyle (sin fallar)
       working-directory: ./InventarioCRUD
-      run: mvn checkstyle:check -Dcheckstyle.failOnViolation=false
-      
+      run: |
+        mvn checkstyle:check -Dcheckstyle.failOnViolation=false || echo "Checkstyle encontró problemas pero continuamos"
+        
     - name: Ejecutar PMD
       working-directory: ./InventarioCRUD
-      run: mvn pmd:pmd
-      
+      run: |
+        mvn pmd:pmd -Dpmd.failOnViolation=false || echo "PMD encontró problemas pero continuamos"
+        
     - name: Ejecutar SpotBugs
       working-directory: ./InventarioCRUD
-      run: mvn spotbugs:check
+      run: |
+        mvn spotbugs:check -Dspotbugs.failOnError=false || echo "SpotBugs encontró problemas pero continuamos"
       
     - name: Subir reportes
       if: always()

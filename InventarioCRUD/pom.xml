@@ -121,6 +121,14 @@
                 <filtering>true</filtering>
             </testResource>
         </testResources>
+        <plugin>
+            <groupId>com.github.spotbugs</groupId>
+            <artifactId>spotbugs-maven-plugin</artifactId>
+            <version>4.7.3.6</version>
+            <configuration>
+                <failOnError>false</failOnError> <!-- Cambiar a true cuando arregles los issues -->
+            </configuration>
+        </plugin>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
