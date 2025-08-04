@@ -1,0 +1,11 @@
+{
+  "name": "2025a-swgr1-smcd-suma",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sebastian Mateo Correa Defaz",
+  "license": "ISC",
+  "description": ""
+}
