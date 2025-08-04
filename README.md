@@ -116,4 +116,4 @@ EXPOSE 8080
 
 CMD ["catalina.sh", "run"]
 🧾 Licencia
-Este proyecto es educativo y no tiene fines comerciales.
+Este proyecto es educativo y no tiene fines comerciales por tal razon tiene funciones basicas
