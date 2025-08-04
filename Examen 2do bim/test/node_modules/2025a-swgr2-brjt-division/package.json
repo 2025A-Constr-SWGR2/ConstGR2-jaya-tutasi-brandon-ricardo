@@ -1,11 +1,11 @@
 {
-  "name": "2025a-swgr1-bagl-division",
+  "name": "2025a-swgr2-brjt-division",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Bryan Alejandro Guano Lupera",
+  "author": "Brandon Ricardo Jaya Tutasi",
   "license": "ISC",
   "description": ""
 }

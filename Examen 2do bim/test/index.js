@@ -1,7 +1,7 @@
-const paqueteSuma = require('2025a-swgr1-smcd-suma');
-const paqueteMultiplicacion = require('2025a-swgr1-smcd-multiplicacion');
-const paqueteResta = require('2025a-swgr1-bagl-resta');
-const paqueteDivision = require('2025a-swgr1-bagl-division');
+const paqueteSuma = require('2025a-swgr2-brjt-suma');
+const paqueteMultiplicacion = require('2025a-swgr2-brjt-multiplicacion');
+const paqueteResta = require('2025a-swgr2-brjt-resta');
+const paqueteDivision = require('2025a-swgr2-brjt-division');
 
 const respuestaSuma = paqueteSuma.suma(2, 1);
 const respuestaMultiplicacion = paqueteMultiplicacion.multiplicacion(2, 5);

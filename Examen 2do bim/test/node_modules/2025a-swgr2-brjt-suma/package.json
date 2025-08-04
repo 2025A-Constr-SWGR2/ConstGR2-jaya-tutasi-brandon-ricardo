@@ -1,11 +1,11 @@
 {
-  "name": "2025a-swgr1-smcd-suma",
+  "name": "2025a-swgr2-brjt-suma",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Sebastian Mateo Correa Defaz",
+  "author": "Brandon Ricardo Jaya Tutasi",
   "license": "ISC",
   "description": ""
 }
